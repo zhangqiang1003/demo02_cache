@@ -1,0 +1,22 @@
+# docker-compose.yaml
+version: '3.8'
+
+services:
+  web:
+    image: quert-web:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "18080:18080"  # 主机端口:容器端口
+    environment:
+      - APP_ENV=production
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+
+    networks:
+      - quert-net
+
+networks:
+  quert-net:
+    driver: bridge
